@@ -1,4 +1,7 @@
+import { FileReader } from "../helpers";
+
 const INPUT_PATH = "input.txt";
+const fileReader = new FileReader(INPUT_PATH);
 
 class CalibrationValues {
   wordToNumber: Map<string, string>;
@@ -17,20 +20,8 @@ class CalibrationValues {
     ]);
   }
 
-  async readInput(): Promise<string> {
-    const input = Bun.file(INPUT_PATH);
-    const inputData = await input.text();
-
-    return inputData;
-  }
-
-  async readInputByLines(): Promise<Array<string>> {
-    const inputData = await this.readInput();
-    return inputData.trim().split("\n");
-  }
-
   async part_one(): Promise<number> {
-    const values = await this.readInput();
+    const values = await fileReader.read();
 
     let firstValue: string | null = null;
     let lastValue: string | null = null;
@@ -80,7 +71,7 @@ class CalibrationValues {
      * the easiest solution for now is replacing any word match to it's corresponding number
      * reading by lines instead of char by char
      */
-    const lines = await this.readInputByLines();
+    const lines = await fileReader.readLines();
 
     // let calibrationValues: Array<number> = [];
 
