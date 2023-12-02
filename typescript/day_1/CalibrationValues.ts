@@ -1,6 +1,6 @@
-import { FileReader } from "../helpers";
+import { FileReader } from '../helpers';
 
-const INPUT_PATH = "input.txt";
+const INPUT_PATH = 'input.txt';
 const fileReader = new FileReader(INPUT_PATH);
 
 class CalibrationValues {
@@ -8,15 +8,15 @@ class CalibrationValues {
 
   constructor() {
     this.wordToNumber = new Map([
-      ["one", "1"],
-      ["two", "2"],
-      ["three", "3"],
-      ["four", "4"],
-      ["five", "5"],
-      ["six", "6"],
-      ["seven", "7"],
-      ["eight", "8"],
-      ["nine", "9"],
+      ['one', '1'],
+      ['two', '2'],
+      ['three', '3'],
+      ['four', '4'],
+      ['five', '5'],
+      ['six', '6'],
+      ['seven', '7'],
+      ['eight', '8'],
+      ['nine', '9'],
     ]);
   }
 
@@ -41,9 +41,9 @@ class CalibrationValues {
      */
 
     for (let i = 0; i < values.length; i++) {
-      let calibration = values[i];
+      const calibration = values[i];
 
-      let num = parseInt(calibration);
+      const num = parseInt(calibration);
       if (!isNaN(num) && num >= 0) {
         if (!firstValue) {
           firstValue = calibration;
@@ -77,11 +77,11 @@ class CalibrationValues {
 
     let sum = 0;
 
-    for (let line of lines) {
+    for (const line of lines) {
       let replaced = new Array(line.length);
 
       for (const [word, num] of this.wordToNumber) {
-        for (const match of line.matchAll(new RegExp(word, "g"))) {
+        for (const match of line.matchAll(new RegExp(word, 'g'))) {
           if (match.index !== undefined && match.index >= 0) {
             replaced[match.index] = num;
           }
@@ -89,9 +89,9 @@ class CalibrationValues {
       }
 
       for (let i = 0; i < line.length; i++) {
-        let calibration = line[i];
+        const calibration = line[i];
 
-        let num = parseInt(calibration);
+        const num = parseInt(calibration);
         if (!isNaN(num) && num >= 0) {
           replaced[i] = calibration;
         }
@@ -113,11 +113,11 @@ class CalibrationValues {
   }
 
   getFirstNumberChar(line: string): string {
-    for (let char of line) {
+    for (const char of line) {
       if (!isNaN(parseInt(char))) return char;
     }
 
-    return "0";
+    return '0';
   }
 
   getLastNumberChar(line: string): string {
@@ -125,14 +125,10 @@ class CalibrationValues {
       if (!isNaN(parseInt(line[i]))) return line[i];
     }
 
-    return "0";
+    return '0';
   }
 }
 
 const calibrationValues = new CalibrationValues();
-calibrationValues
-  .part_one()
-  .then((result) => console.log("Part One: ", result));
-calibrationValues
-  .part_two()
-  .then((result) => console.log("Part Two: ", result));
+calibrationValues.part_one().then((result) => console.log('Part One: ', result));
+calibrationValues.part_two().then((result) => console.log('Part Two: ', result));
